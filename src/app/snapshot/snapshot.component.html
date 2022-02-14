@@ -1,0 +1,22 @@
+<body>
+<button (click)="openMedia()">开启摄像头</button>
+<button (click)="closeMedia()">关闭摄像头</button>
+<button (click)="takePhoto()">拍照</button>
+<br/><br/>
+<button (click)="infiniteTakePhoto()">开启无限抓图</button>
+<br/><br/>
+<button (click)="stopInfiniteTakePhoto()">关闭无限抓图</button>
+<br/>
+<button (click)="clearTakePhotoCount()">清空抓图计数</button>
+<button (click)="clearSavedPhoto()">清空已存文件</button>
+
+<br/>
+<p>take count:{{photoCount}}</p>
+<br/>
+<p >saved count: {{savedCount}}</p>
+<br/>
+<video style="display: none;" id="src-video" class="src-video" width="500px" height="500px" autoplay="autoplay"
+       [srcObject]=""></video>
+<canvas id="canvas" width="500px" height="500px" style="display: none;"></canvas>
+<img src="{{photoSrc}}" alt="" class="photo">
+</body>
