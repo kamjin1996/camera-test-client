@@ -26,6 +26,7 @@ export class SnapshotComponent implements OnInit {
   photoWidth: number = this.videoWidth
   photoHeight: number = this.videoHeight
   quality: number = 1.0
+  eachSecTackPhoto = 24
 
   ngOnInit(): void {
     this.photoCount = 0
@@ -64,7 +65,7 @@ export class SnapshotComponent implements OnInit {
     let canvas = <HTMLCanvasElement>document.getElementById('canvas');
     //获取 `canvas`元素，根据`srcVideo`中的数据进行图片绘制 `ctx.drawImage()`；
     let ctx = <CanvasRenderingContext2D>canvas.getContext('2d');
-    ctx.drawImage(this.srcVideo, 0, 0, this.videoWidth, this.videoHeight);//
+    ctx.drawImage(this.srcVideo, 0, 0, this.videoWidth, this.videoHeight);
     //将 `canvas`绘制的图片信息，展示在 `img`标签中；
     //closeMedia();
     return this.photoSrc = canvas.toDataURL("image/jpeg", this.quality);
@@ -80,7 +81,7 @@ export class SnapshotComponent implements OnInit {
       console.log("发送：" + dataURL)
 
       this.socketService.sendImageBase64(dataURL)
-    }, 41); //相当于每秒抓24帧
+    }, 1000 / this.eachSecTackPhoto); //每秒抓帧
   }
 
   stopInfiniteTakePhoto() {
