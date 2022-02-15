@@ -1,13 +1,14 @@
 import {Injectable} from "@angular/core";
+import {environment} from "../../environments/environment";
 
 @Injectable({providedIn: 'root'})
 export class SocketUtil {
 
   private socket!: WebSocket;
 
-  private wsURL = "ws://localhost:8081/websocket/20"
+  private wsURL = `${environment.wsHost}` + `${environment.uid}`
 
-  private handleMap = new Map()
+  private handleMap: Map<string, Function> = new Map()
 
   /**
    *
@@ -31,13 +32,6 @@ export class SocketUtil {
         console.log("Socket 已打开");
       };
 
-      //获得消息事件
-      // this.socket.onmessage = (msg: any) => {
-      //   alert("接受到服务器信息: " + msg.data);
-      //   console.log(msg.data);
-      //   //发现消息进入    开始处理前端触发逻辑
-      // };
-
       //关闭事件
       this.socket.onclose = () => {
         console.log("Socket已关闭");
@@ -58,14 +52,11 @@ export class SocketUtil {
    * @param messageHandle
    */
   registryHandle(messageName: string, messageHandle: (response: any) => void) {
-    //发现消息进入    开始处理前端触发逻辑
-
     this.handleMap.set(messageName, messageHandle)
-
     this.socket.onmessage = (msg: any) => {
       console.log("接受到服务器信息: " + msg.data);
       let jsonData = JSON.parse(msg.data)
-      let handle = this.handleMap.get(jsonData.type)
+      let handle = <Function>this.handleMap.get(jsonData.type)
       return handle(jsonData)
     };
 

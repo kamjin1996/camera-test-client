@@ -13,9 +13,7 @@ import {SocketUtil} from "./snapshot/socket-util";
   imports: [
     BrowserModule
   ],
-  providers: [{
-    provide: APP_INITIALIZER, useClass: SocketUtil
-  }],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

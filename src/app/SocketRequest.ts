@@ -2,7 +2,7 @@ export class SocketRequest {
 
   data: any
 
-  type!: "imageBase64" | "connect" | "imageClear"
+  type!: "ImageBase64" | "Connect" | "ImageClear"
 
-  uid!: number
+  uid!: string
 }
