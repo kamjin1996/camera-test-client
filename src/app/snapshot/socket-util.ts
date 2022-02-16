@@ -6,8 +6,6 @@ export class SocketUtil {
 
   private socket!: WebSocket;
 
-  private wsURL = `${environment.wsHost}` + `${environment.uid}`
-
   private handleMap: Map<string, Function> = new Map()
 
   /**
@@ -20,7 +18,14 @@ export class SocketUtil {
 
   constructor() {
     console.log("WebSocket Connected...");
-    this.socket = new WebSocket(this.wsURL); //打开事件
+
+    if (localStorage['uid'] == null) {
+      localStorage['uid'] = '20' //TODO fix the code
+    }
+
+    console.log("uid is " + localStorage['uid'])
+    let wsURL = `${environment.wsHost}` + localStorage['uid']
+    this.socket = new WebSocket(wsURL); //打开事件
 
     if (typeof (WebSocket) == "undefined") {
       console.log("您的浏览器不支持WebSocket");

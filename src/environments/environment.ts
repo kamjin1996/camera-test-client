@@ -4,7 +4,6 @@
 
 export const environment = {
   production: false,
-  uid: '20',
   wsHost: "ws://localhost:8081/websocket/"
 };
 

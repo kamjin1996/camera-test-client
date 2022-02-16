@@ -15,6 +15,8 @@ export class SnapshotComponent implements OnInit {
 
   savedCount!: number
 
+  photoSavePathOnServer!: string
+
   photoSrc!: string
   mediaStream!: MediaStream;
   srcVideo!: HTMLVideoElement;
@@ -38,6 +40,9 @@ export class SnapshotComponent implements OnInit {
     })
     this.socketService.addConnectSuccessTipListener((response: any) => {
       alert(response.data)
+    })
+    this.socketService.addImageSavePathListener((response: any) => {
+      this.photoSavePathOnServer = response.data
     })
   }
 
