@@ -20,7 +20,7 @@ export class SocketUtil {
     console.log("WebSocket Connected...");
 
     if (localStorage['uid'] == null) {
-      localStorage['uid'] = '20' //TODO fix the code
+      throw new DOMException("调试状态 请在控制台localStorage设置uid参数")
     }
 
     console.log("uid is " + localStorage['uid'])
